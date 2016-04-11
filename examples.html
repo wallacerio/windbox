@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WindBox - Examples</title>
+	<meta name="viewport" content="initial-scale=1,minimum-scale=1, maximum-scale=1,user-scalable=no">  
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+
+</head>
+<body>
+
+
+
+<div>
+	<h1>WindBox</h1>
+	<h4>Box modal cross-browser</h4>
+	<hr/>
+</div>
+
+<div>	
+	<p>developed by: Wallace Rio &lt;wallrio@gmail.com&gt;  - 10/04/2016
+	
+
+	</p>
+	<hr/>
+</div>
+
+
+<h3>Examples:</h3>
+
+<nav>
+	<ul>
+		<li><a href="example/example1.html" >Box simply</a></li>		
+		<li><a href="example/example2.html" >Ajax request with callback</a></li>		
+		<li><a href="example/example3.html" >Show modal with image</a></li>		
+		<li><a href="example/example4.html" >Show modal with link action</a></li>		
+	</ul>
+</nav>
+
+<hr>
+
+<h4>USAGE:</h4>
+
+
+
+<p>Inclua o CSS e o JS no HEAD, depois apenas faça a chamada do plugin</p>
+
+
+
+
+&lt;link rel="stylesheet" href="windbox/windbox.css"'&gt;<br>
+&lt;script type="text/javascript" src='windbox/windbox.js'&gt;&lt;/script'&gt;
+
+<br><br>
+
+<strong>Exemplo:</strong>
+<textarea class="code"  style='width:100%;height:100px' readonly="">
+	<script>
+		windbox('plugin',parameters_json);
+		windbox('plugin').show();
+	</script>
+</textarea>
+
+
+<strong>API:</strong> parameters_json:<br><Br>
+<pre>
+icon:'[info]' 
+title:'Atenção' 
+cssclass:'windbox_flat' 
+fixed:true = boolean 
+drag:true = boolean
+content:{
+	value:'text', 
+	url:'path_of_file', 
+	img:{		
+		size:0.7,  
+		src:'path_image'
+	}
+},
+callback:function(result){
+		
+},
+input:{
+	"close":{
+			"container":"control-right",
+			"type":"submit",			
+			click:function(){							   
+				action.close();			
+				return false;
+			}
+		},
+}
+</pre>
+
+<strong>icon = </strong> define icon to box - (info/question/success/error/loading/success_email)<br>
+<strong>title = </strong> (string) define text title to box<br>
+<strong>cssclass = </strong> (string) string of class css<br>
+<strong>target = </strong> (boolean) define locate to load box<br>
+<strong>fixed = </strong> (boolean) define if box fixed or absolute<br>
+<strong>drag = </strong> (boolean) define if box movable<br>
+<strong>content = </strong> define content of box<br>
+<strong>content.value =</strong> (string) define content with string<br>
+<strong>content.url =</strong> (string) define content by ajax<br>
+<strong>content.img =</strong> (string) define content with image<br>
+<strong>content.img.size = </strong> define size of image - (auto/full/parcent)<br>
+<strong>content.img.src =</strong> (string) define source of image<br>
+<strong>callback = </strong> (function clousure) define callback after load content<br>
+<strong>input = </strong> define buttons to box<br>
+<strong>input.container =</strong> define locate to insert button - (control-right/control-center/control-left)<br>
+<strong>input.type =</strong> define type of button - (a/button/submit)<br>
+<Br>
+
+<strong>actions </strong><br>
+call funcitons to run on click button and callback<br><br>
+action.close(id); = close box
+action.title(string); = change title of box
+action.icon(string); = change icon of box
+action.loading.show(id); = show loading info
+action.loading.hide(id); = hide loading info
+</body>
+</html>

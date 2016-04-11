@@ -1,0 +1,264 @@
+/**
+ * WindBox 1.0 - 10/04/2016
+ * modal box cross-browser
+ * 
+ * developed by Wallace Rio <wallrio@gmail.com>
+ * wallrio.com
+ * 
+ * tested on firefox/chrome/opera/ie8/safari
+ */
+
+
+
+.windbox_default [data-windbox="background"]{
+	position: fixed;
+	display: block;
+	
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+
+	background:rgb(0,0,0);
+    background: transparent\9; 
+    background:rgba(0,0,0,0.8); 
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000); /* needed for IE 6-8 */    
+    zoom: 1; 
+
+}.windbox_default [data-windbox="wrapper"]{	
+	position: absolute;
+	display: block;
+	
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+
+	pointer-events:none;
+	
+}.windbox_default [data-windbox="box"]{		
+	position: absolute;
+	display: table;
+	background: #ccc;
+	pointer-events:auto;
+}
+
+.windbox_default [data-windbox="loading"]{		
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: table;
+
+	background:rgb(0,0,0); 
+    background: transparent\9; 
+    background:rgba(0,0,0,0.9);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000); 
+    zoom: 1; 
+	
+}.windbox_default [data-windbox="loading-content"]{	
+	display: table-cell;
+	margin: auto;
+	vertical-align: middle;
+	text-align: center;
+	color: #fff;
+
+}
+
+.windbox_default [data-windbox="header"]{
+	display: table;
+	width: 100%;
+}.windbox_default [data-windbox="header-icon"]{
+	display: table-cell;
+	width: 1px;
+}.windbox_default [data-windbox="header-title"]{
+	display: table-cell;	
+}
+
+.windbox_default [data-windbox="footer"]{
+	display: table;
+	width: 100%;
+	box-sizing: border-box;
+}.windbox_default [data-windbox="footer-left"]{
+	display: table-cell;
+	text-align: left;
+	vertical-align: top;
+	width: 33%;
+}.windbox_default [data-windbox="footer-center"]{
+	display: table-cell;
+	text-align: center;
+	vertical-align: top;
+	width: 33%;
+}.windbox_default [data-windbox="footer-right"]{
+	display: table-cell;	
+	text-align: right;
+	vertical-align: top;
+	width: 33%;
+}
+
+
+.windbox_default [data-windbox="box"]{
+	background: #fff;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    box-shadow: 0px 0px 5px -3px #000;
+
+}
+
+/* Header ------------------------------------------  */
+.windbox_default [data-windbox="header"]{
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 5px;
+}.windbox_default [data-windbox="header-icon"]{
+	padding:5px;
+}.windbox_default [data-windbox="header-title"]{
+	vertical-align: middle;
+}
+
+/* footer ------------------------------------------  */
+.windbox_default [data-windbox="footer"]{
+	border-top: 1px solid #ccc;
+	margin-top: 5px;
+	padding:5px;
+
+	}	
+
+/* content ------------------------------------------  */
+.windbox_default [data-windbox="content"]{
+	padding: 5px;	
+}.windbox_default [data-windbox="content"] img{
+
+}
+
+
+
+.windbox_default [data-type="submit"],
+.windbox_default [data-type="a"],
+.windbox_default [data-type="button"]{
+	display: inline-table;
+	
+	font-size: 13px ;
+	font-family: arial;
+	-moz-margin-start: -1px;
+	background:#fff;
+	
+	
+	border: 1px solid #ccc;
+	border-radius: 2.5px;
+	color:444 ;
+	text-shadow: none;
+	cursor: pointer;
+	padding: 7px;
+	padding-left: 13px;
+	padding-right: 13px;
+
+
+
+}
+@-moz-document url-prefix() {
+    .windbox_default [data-type="a"]{
+		padding-bottom: 8px;
+		padding-top: 8px;
+	}
+}
+
+
+
+.windbox_default [data-type="submit"]:hover,
+.windbox_default [data-type="a"]:hover,
+.windbox_default [data-type="button"]:hover{
+	display: inline-table;
+	
+	font-size: 13px ;
+	font-family: arial;
+	-moz-margin-start: -1px;
+	
+	
+	
+	border-radius: 2.5px;
+	
+	text-shadow: none;
+	cursor: pointer;
+	padding: 7px;
+	padding-left: 13px;
+	padding-right: 13px;
+
+	color:#fff;
+	background:#66bdff;
+	border:1px solid #0d9eff;
+}
+@-moz-document url-prefix() {
+    .windbox_default [data-type="a"]:hover{
+		padding-bottom: 8px;
+		padding-top: 8px;
+	}
+}
+
+/*.windbox_default [data-type="a"]:hover{
+	padding-bottom: 8px;
+	padding-top: 8px;	
+}*/
+.windbox_default [data-type="submit"]:active,
+.windbox_default [data-type="a"]:active,
+.windbox_default [data-type="button"]:active{
+	display: inline-table;
+	
+	font-size: 13px ;
+	font-family: arial;
+	-moz-margin-start: -1px;
+
+	border-radius: 2.5px;
+	
+	text-shadow: none;
+	cursor: pointer;
+	padding: 7px;
+	padding-left: 13px;
+	padding-right: 13px;
+
+	color:#00416E;
+	background:#007CD0;
+	border:1px solid #025E9C;
+}
+@-moz-document url-prefix() {
+    .windbox_default [data-type="a"]:active{
+		padding-bottom: 8px;
+		padding-top: 8px;
+	}
+}
+
+.windbox_default  .iconinfo {
+		display: block;
+		width: 34px;
+		height: 32px ;
+		background: url('icons/info.png') no-repeat;
+	}.windbox_default  .iconloading {
+		display: block;
+		width: 34px;
+		height: 32px ;
+		background: url('icons/loading.gif') no-repeat;
+		
+	}.windbox_default .iconsuccess {
+		display: block;
+		width: 34px;
+		height: 32px ;
+		background: url('icons/success.png') no-repeat;
+		
+	}.windbox_default .iconsuccess_email {
+		display: block;
+		width: 34px;
+		height: 32px ;
+		background: url('icons/success_email.png') no-repeat;
+		
+	}.windbox_default .iconerror {
+		display: block;
+		width: 34px;
+		height: 32px ;
+		background: url('icons/error.png') no-repeat;
+		
+	}.windbox_default .iconquestion {
+		display: block;
+		width: 34px;
+		height: 32px ;
+		background: url('icons/question.png') no-repeat;
+		
+	}

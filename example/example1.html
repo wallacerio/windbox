@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Windbox - Example 1</title>
+	<meta name="viewport" content="initial-scale=1,minimum-scale=1, maximum-scale=1,user-scalable=no">  
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+	<!-- Reference to windbox library -->
+	<link  rel="stylesheet" href="../windbox/windbox.css">
+	<script type="text/javascript" src="../windbox/windbox.js"></script>
+	
+
+
+
+<script type="text/javascript">
+	
+	windbox('plugin',{
+		icon:'[info]',
+		title:'WindBbox',			
+		fixed:true,		
+		drag:true,		
+		content:{
+			 value:'hello world',			
+		},
+		callback:function(result){		
+		},
+		input:{
+			"alert":{
+					"container":"control-right",
+					"type":"a",
+					"value":"Alert",									
+					click:function(){								
+						alert('this is alert');
+						return false;
+					}
+				},
+				"alert2":{
+					"container":"control-center",
+					"type":"button",
+					"value":"Alert2",									
+					click:function(){				
+					    alert('this is alert 2 ');
+					
+						return false;
+					}
+				},
+				"close2":{
+					"container":"control-left",
+					"type":"submit",
+					"value":"Close",									
+					click:function(){				
+					    action.close();
+					
+						return false;
+					}
+				}
+		}
+	});
+	
+	
+	
+windbox('plugin').show();	
+	
+</script>
+
+</head>
+<body>
+
+
+<div>
+
+	<a href="../examples.html">Voltar</a> - 
+	Box simply
+	<p>
+	Visualize o código desta página com CTRL+U
+</p>
+	<hr>
+
+</div>
+
+</body>
+</html>
