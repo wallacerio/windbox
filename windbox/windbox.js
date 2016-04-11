@@ -11,7 +11,7 @@
 (function(){
 
 	var listWindow = [];
-	var zindex = 100;
+	var zindex = 10000;
 	var contBox = 0;
 	var alignBoxTime = 0;
 	var documentLoaded = false;
@@ -229,7 +229,56 @@
 			return size;
 		}
 
+		this.change = function(localOptions){
+		
+			var content = localOptions['content'] || null;										
+			var target = localOptions['target'] || null;										
+			var cssclass = localOptions['cssclass'] || null;										
+											
+			var input = localOptions['input'] || null;	
+			var callback = localOptions['callback'] || null;	
 
+			if(localOptions['title'] != null) var title = localOptions['title']; else var fixed = null;
+			if(localOptions['icon'] != null) var icon = localOptions['icon']; else var icon = null;
+
+			if(localOptions['fixed'] != null) var fixed = localOptions['fixed']; else var fixed = true;
+
+			if(localOptions['drag'] != null) var drag = localOptions['drag']; else var drag = true;
+
+			if(localOptions['limitWindow'] != null) var limitWindow = localOptions['limitWindow']; else var limitWindow = true;
+
+			if(localOptions['escape'] != null) var escape = localOptions['escape']; else var escape = true;
+
+
+			
+			
+			if(icon != null) listWindow[idBox].icon = icon;
+			if(title != null) listWindow[idBox].title = title;
+
+			if(content != null){
+				if(content.value != null )
+				listWindow[idBox].content.value = content.value;
+				if(content.url != null )
+				listWindow[idBox].content.value = content.url;
+				if(content.img != null ){
+					if(content.img.src != null )
+					listWindow[idBox].content.img.src = content.img.src;	
+					if(content.img.size != null )
+					listWindow[idBox].content.img.size = content.img.size;	
+				}
+				
+			}
+
+			if(target != null) listWindow[idBox].target = target;
+			if(cssclass != null) listWindow[idBox].cssclass = cssclass;
+			if(fixed != null) listWindow[idBox].fixed = fixed;
+			if(input != null) listWindow[idBox].input = input;
+			if(drag != null) listWindow[idBox].drag = drag;
+
+			// listWindow[idBox] = op;
+			// this.id = idBox;
+			return this;
+		}
 		
 		/**
 		 * draw the box
@@ -471,9 +520,9 @@
 		this.alignBox = function(id,callback){
 			id = id || this.id;
 			
+				var fixed = listWindow[id].fixed;
 		
-		
-				 if(fixed == true){
+				if(fixed == true){
 					 var adjustTop = 0;
 					 var adjustLeft = 0;
 				 }else{
@@ -522,6 +571,7 @@
 					return;
 				
 					this.draw(idBox,function(id){
+
 						this.setContent(id);
 						
 					});								
@@ -763,11 +813,11 @@
 		 */
 		this.adjustIcon = function(icon){
 
-			icon = icon.replace('[info]','<div class="iconinfo"></div<');
-			icon = icon.replace('[loading]','<div class="iconloading"></div<');
-			icon = icon.replace('[success]','<div class="iconsuccess"></div<');
-			icon = icon.replace('[error]','<div class="iconerror"></div<');
-			icon = icon.replace('[question]','<div class="iconquestion"></div<');
+			icon = icon.replace('[info]','<div class="iconinfo"></div>');
+			icon = icon.replace('[loading]','<div class="iconloading"></div>');
+			icon = icon.replace('[success]','<div class="iconsuccess"></div>');
+			icon = icon.replace('[error]','<div class="iconerror"></div>');
+			icon = icon.replace('[question]','<div class="iconquestion"></div>');
 
 			return icon;
 		}
@@ -858,7 +908,7 @@
 			}
 
 			
-			var contentHtml = contentValue;
+			var contentHtml = '<div data-windbox="content-value" >'+contentValue+'</div>';
 
 
 			if(contentImgSize == 'auto'){
@@ -874,7 +924,7 @@
 
 			icon = this.adjustIcon(icon);
 
-
+			
 			var drawInputs = this.drawInputs(id);			
 			document.getElementById('windbox_footerleft_'+id).innerHTML = drawInputs.controlLeft+''+drawInputs.control;
 			document.getElementById('windbox_footercenter_'+id).innerHTML = drawInputs.controlCenter;
@@ -899,6 +949,7 @@
 				action.loading.show();	
 			},100);
 			
+
 			if(urlTarget != null){		
 
 				
