@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Windbox - Example 1</title>
+	<meta name="viewport" content="initial-scale=1,minimum-scale=1, maximum-scale=1,user-scalable=no">  
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+	<!-- Reference to windbox library -->
+	<link  rel="stylesheet" href="../windbox/windbox.css">
+	<script type="text/javascript" src="../windbox/windbox.js"></script>
+	
+
+
+
+<script type="text/javascript">
+	
+	windbox('plugin',{
+		icon:'[info]',
+		title:'WindBbox',			
+		fixed:true,		
+		drag:true,				
+		callback:function(result){		
+		},
+		input:{
+			"name":{
+					"container":"content",
+					"type":"text",
+					"value":"",									
+					"placeholder":"Nome:",
+					"required":true
+				},		
+			"ok":{
+				"container":"control-left",
+				"type":"submit",
+				"value":"Ok",									
+				click:function(){				
+				    var name = action.input("name").value;			
+				    alert('name: '+name);			
+					return false;
+				}
+			}
+		}
+	});
+	
+	
+	
+	
+		windbox('plugin').show();			
+	
+	
+</script>
+
+</head>
+<body>
+
+
+<div>
+
+	<a href="../examples.html">Voltar</a> - 
+	Box input
+	<p>
+	Visualize o código desta página com CTRL+U
+</p>
+	<hr>
+
+	<a href="#" onclick="CallBox()">Call box modal</a>
+</div>
+
+</body>
+</html>

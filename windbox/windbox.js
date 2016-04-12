@@ -303,8 +303,9 @@
 						html += '</div>';
 
 						html += '<div data-windbox="header" id="windbox_header_'+id+'" >';
-							html += '<div data-windbox="header-icon" id="windbox_headericon_'+id+'" ></div>';
-							html += '<div data-windbox="header-title" id="windbox_headertitle_'+id+'" ></div>';
+							html += '<div data-windbox="header-left" id="windbox_headericon_'+id+'" ></div>';
+							html += '<div data-windbox="header-center" id="windbox_headertitle_'+id+'" ></div>';
+							html += '<div data-windbox="header-right" id="windbox_headerright_'+id+'" ></div>';
 						html += '</div>';
 
 						html += '<div data-windbox="content" id="windbox_content_'+id+'" >';
@@ -598,7 +599,9 @@
 			id = id || this.id;
 
 			var inputsLoading = '';
-			var inputsHeaderControl = '';
+			var inputsHeaderRight = '';
+			var inputsHeaderCenter = '';
+			var inputsHeaderLeft = '';
 			var inputsContent = '';
 			var inputsControl = '';
 			var inputsControlRight = '';
@@ -611,11 +614,29 @@
 
 			for( key in inputs){		
 				var type = inputs[key].type || 'a';
-				var value = inputs[key].value;
-				var css = inputs[key].css;
-				var click = inputs[key].click;
+				var value = inputs[key].value || '';
+				var css = inputs[key].css || '';
+				var click = inputs[key].click || null;
+				var placeholder = inputs[key].placeholder || '';
+				var required = inputs[key].required || '';
+				var options = inputs[key].options || null;
 				var container = inputs[key].container || 'control';
 
+				var optionsval = "";
+				var option_selected = "";
+
+				if(required)
+					required = 'required';
+			
+				if(options != null){
+					for(keyopt in options){
+						option_selected = '';
+						if(options[keyopt].selected)
+						option_selected = 'selected';
+						optionsval += '<option value="'+options[keyopt].value+'" '+option_selected+'>'+options[keyopt].text+'</option>';
+					}
+				}					
+				// options
 				
 
 				if(type == 'submit'){
@@ -624,6 +645,13 @@
 					inputsHtml = '<button type="button" data-type="button" name="'+key+'" id="windbox_input_'+id+'_'+key+'" >'+value+'</button>';
 				}else if(type == 'a'){
 					inputsHtml = '<a name="'+key+'" id="windbox_input_'+id+'_'+key+'" data-type="a" >'+value+'</a>';
+
+				}else if(type == 'text'){
+					inputsHtml = '<input type="'+type+'" value="'+value+'"  placeholder="'+placeholder+'" name="'+key+'" id="windbox_input_'+id+'_'+key+'" data-type="text" '+required+' >';
+				}else if(type == 'textarea'){
+					inputsHtml = '<textarea  name="'+key+'" placeholder="'+placeholder+'" id="windbox_input_'+id+'_'+key+'" data-type="textarea" '+required+' >'+value+'</textarea>';
+				}else if(type == 'select'){
+					inputsHtml = '<select  name="'+key+'"  id="windbox_input_'+id+'_'+key+'" data-type="select" '+required+' >'+optionsval+'</select>';
 				}
 
 				if(container == 'loading'){
@@ -639,7 +667,14 @@
 					inputsControlCenter += inputsHtml;	
 						
 				}else if(container == 'header'){
-					inputsHeaderControl += inputsHtml;
+					inputsHeaderRight += inputsHtml;
+				}else if(container == 'header-right'){
+					inputsHeaderRight += inputsHtml;
+				}else if(container == 'header-left'){
+					inputsHeaderLeft += inputsHtml;
+				}else if(container == 'header-center'){
+					inputsHeaderCenter += inputsHtml;
+								
 				}else if(container == 'content'){
 					inputsContent += inputsHtml;
 				}
@@ -651,7 +686,11 @@
 				control:inputsControl,
 				controlRight:inputsControlRight,
 				controlCenter:inputsControlCenter,
-				controlLeft:inputsControlLeft
+				controlLeft:inputsControlLeft,
+				content:inputsContent,
+				headerRight:inputsHeaderRight,
+				headerCenter:inputsHeaderCenter,
+				headerLeft:inputsHeaderLeft
 			};
 		}
 
@@ -767,42 +806,48 @@
 		 * adjust image defined by attribute content.img
 		 */
 		this.imgAdjust = function(id,callback){
-			var content = listWindow[id].content;
+			var content = listWindow[id].content || null;
+
 			var contentImgSrc = ""; 
 			var contentImgSize = ""; 
-			if(content.img){
-				var contentImgSrc = content.img.src || ""; 
-				var contentImgSize = content.img.size || ""; 
-			}
-
-			var ImgWidth = document.getElementById('windbox_contentimg_'+id).offsetWidth;
-			var ImgHeight = document.getElementById('windbox_contentimg_'+id).offsetHeight;
+			if(content != null){		
+				if(content.img ){
+					var contentImgSrc = content.img.src || ""; 
+					var contentImgSize = content.img.size || ""; 
+				}
 			
-			if(contentImgSize == 'auto'){
-				var forceImgWidth = 'auto';
-			}else if(contentImgSize == 'full'){
-				var forceImgWidth = '100%';
-			}else{				
-				if(contentImgSize == '')
-					contentImgSize = 0.5;
-
-				var forceImgWidth = (this.windowSize().width) * contentImgSize + 'px';
-				var forceImgHeight = (this.windowSize().height) * contentImgSize + 'px';
-			}
-
 
 			
-			if(ImgHeight+100 >= this.windowSize().height)
-			document.getElementById('windbox_contentimg_'+id).style.width = forceImgWidth;
 
-			var ImgHeight = document.getElementById('windbox_contentimg_'+id).offsetHeight+100;
+				var ImgWidth = document.getElementById('windbox_contentimg_'+id).offsetWidth;
+				var ImgHeight = document.getElementById('windbox_contentimg_'+id).offsetHeight;
+				
+				if(contentImgSize == 'auto'){
+					var forceImgWidth = 'auto';
+				}else if(contentImgSize == 'full'){
+					var forceImgWidth = '100%';
+				}else{				
+					if(contentImgSize == '')
+						contentImgSize = 0.5;
 
-			if(ImgHeight+100 >= this.windowSize().height){
-				document.getElementById('windbox_contentimg_'+id).style.height = forceImgHeight;
-				document.getElementById('windbox_contentimg_'+id).style.width = 'auto';
-			}
+					var forceImgWidth = (this.windowSize().width) * contentImgSize + 'px';
+					var forceImgHeight = (this.windowSize().height) * contentImgSize + 'px';
+				}
+
+
+				
+				if(ImgHeight+100 >= this.windowSize().height)
+				document.getElementById('windbox_contentimg_'+id).style.width = forceImgWidth;
+
+				var ImgHeight = document.getElementById('windbox_contentimg_'+id).offsetHeight+100;
+
+				if(ImgHeight+100 >= this.windowSize().height){
+					document.getElementById('windbox_contentimg_'+id).style.height = forceImgHeight;
+					document.getElementById('windbox_contentimg_'+id).style.width = 'auto';
+				}
 
 			
+			}
 
 			if(callback)
 				callback();
@@ -827,6 +872,12 @@
 		 * actions for use by user	
 		 */
 		this.action = {	
+
+			input:function(name,iDwin){
+				if(iDwin) var id = iDwin; else var id = windbox().id;
+				return document.getElementById('windbox_input_'+id+'_'+name);
+			},
+
 			setOnload:function(string){
 				documentLoaded = true;
 			},
@@ -837,6 +888,7 @@
 				string = windbox().adjustIcon(string);
 				document.getElementById('windbox_headericon_'+id).innerHTML = string;
 			},
+
 			loading:{
 				show:function(iDwin){
 					if(iDwin) var id = iDwin; else var id = windbox().id;
@@ -851,7 +903,7 @@
 				},
 				hide:function(iDwin){
 					if(iDwin) var id = iDwin; else var id = windbox().id;
-					document.getElementById('windbox_loading_'+id).style.visibility='hidden';
+					document.getElementById('windbox_loading_'+id).style.visibility='hidden';					
 					document.getElementById('windbox_box_'+id).style.visibility='visible';
 					var BoxHeight = document.getElementById('windbox_box_'+id).offsetHeight;						
 					document.getElementById('windbox_loading_'+id).style.height = BoxHeight+(1)+'px';
@@ -894,21 +946,30 @@
 
 			var icon = listWindow[id].icon;
 			var title = listWindow[id].title;
-			var content = listWindow[id].content;
+			var content = listWindow[id].content || null;
 			var callback = listWindow[id].callback;
 
-			var urlTarget = content.url || null;
-			var contentValue = content.value || ""; 
-			var contentType = content.type || "get"; 
-			var contentImgSrc = ""; 
-			var contentImgSize = ""; 
-			if(content.img){
-				var contentImgSrc = content.img.src || ""; 
-				var contentImgSize = content.img.size || ""; 
-			}
-
 			
-			var contentHtml = '<div data-windbox="content-value" >'+contentValue+'</div>';
+			
+			if(content != null){
+							
+				var urlTarget = content.url || null;
+				var contentValue = content.value || ""; 
+				var contentType = content.type || "get"; 
+				var contentImgSrc = ""; 
+				var contentImgSize = ""; 
+
+				if(content.img){
+					var contentImgSrc = content.img.src || ""; 
+					var contentImgSize = content.img.size || ""; 
+				}
+
+				var contentHtml = '<div data-windbox="content-value" >'+contentValue+'</div>';
+
+			}else{
+				var contentHtml = '<div data-windbox="content-value" ></div>';
+			}
+			
 
 
 			if(contentImgSize == 'auto'){
@@ -919,7 +980,11 @@
 				var sizeAjust = 'width:100%';
 			}
 
-			contentHtml += '<img id="windbox_contentimg_'+id+'" src="'+contentImgSrc+'">';
+			if(content != null){
+				contentHtml += '<img id="windbox_contentimg_'+id+'" src="'+contentImgSrc+'">';
+			}else{
+				contentHtml += '';
+			}
 
 
 			icon = this.adjustIcon(icon);
@@ -930,21 +995,27 @@
 			document.getElementById('windbox_footercenter_'+id).innerHTML = drawInputs.controlCenter;
 			document.getElementById('windbox_footerright_'+id).innerHTML = drawInputs.controlRight;		
 
-			document.getElementById('windbox_headericon_'+id).innerHTML = icon;
-			document.getElementById('windbox_headertitle_'+id).innerHTML = title;
-			document.getElementById('windbox_content_'+id).innerHTML = contentHtml;
+			document.getElementById('windbox_headericon_'+id).innerHTML = icon+drawInputs.headerLeft;
+			document.getElementById('windbox_headertitle_'+id).innerHTML = title+drawInputs.headerCenter;
+			document.getElementById('windbox_headerright_'+id).innerHTML = drawInputs.headerRight;
 
-			this.imgAdjust(id);		
-			document.getElementById('windbox_contentimg_'+id).style.display='none';
+			document.getElementById('windbox_content_'+id).innerHTML = contentHtml+''+drawInputs.content;
+
 			
+
+			
+				// return false;
+
+			this.imgAdjust(id);	
+			if(content != null){	
+				document.getElementById('windbox_contentimg_'+id).style.display='none';
+
+			}
 
 
 			action.loading.show();
 
-			alignBoxTime = setInterval(function(){	
-
-								
-
+			alignBoxTime = setInterval(function(){					
 	 			windbox(id).alignBox(id);
 				action.loading.show();	
 			},100);
@@ -976,42 +1047,51 @@
 					
 			}else{
 
+				if(content != null){
+					if(!content.img){					
+						clearInterval(alignBoxTime);
+						action.loading.hide();	
+						windbox(id).alignBox(id);
+						if(callback)
+								callback({
+										type:'string',
+										value:contentValue
+									});
+					}
+				}
+								
 			}
 
 
-			if(contentValue){					
-					clearInterval(alignBoxTime);
-					action.loading.hide();	
-					windbox(id).alignBox(id);
-					if(callback)
-							callback({
-									type:'string',
-									value:contentValue
-								});
-				}
+			
+			
+
 		
-
-	
-
-			if(content.img){
+			if(content != null){
+				if(content.img){
 
 
-				document.getElementById('windbox_contentimg_'+id).style.visibility='hidden';
-				document.getElementById('windbox_contentimg_'+id).style.display='block';				
-				document.getElementById('windbox_contentimg_'+id).onload = function(){												
-					windbox(id).imgAdjust(id,function(){	
-								document.getElementById('windbox_contentimg_'+id).style.visibility='visible';
-							clearInterval(alignBoxTime);
-							windbox(id).alignBox(id);
-							action.loading.hide();	
-							if(callback)
-								callback({
-									type:'img',
-									value:document.getElementById('windbox_contentimg_'+id).src
-								});
-					
-					});	
-				};
+					document.getElementById('windbox_contentimg_'+id).style.visibility='hidden';
+					document.getElementById('windbox_contentimg_'+id).style.display='block';				
+					document.getElementById('windbox_contentimg_'+id).onload = function(){												
+						windbox(id).imgAdjust(id,function(){	
+									document.getElementById('windbox_contentimg_'+id).style.visibility='visible';
+								clearInterval(alignBoxTime);
+								windbox(id).alignBox(id);
+								action.loading.hide();	
+								if(callback)
+									callback({
+										type:'img',
+										value:document.getElementById('windbox_contentimg_'+id).src
+									});
+						
+						});	
+					};
+				}
+			}else{
+				clearInterval(alignBoxTime);
+				windbox(id).alignBox(id);							
+				action.loading.hide(id);		
 			}
 
 			this.setEvents(id);

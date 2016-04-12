@@ -34,6 +34,7 @@
 		<li><a href="example/example2.html" >Ajax request with callback</a></li>		
 		<li><a href="example/example3.html" >Show modal with image</a></li>		
 		<li><a href="example/example4.html" >Show modal with link action</a></li>		
+		<li><a href="example/example5.html" >Box input</a></li>		
 	</ul>
 </nav>
 
@@ -83,11 +84,15 @@ callback:function(result){
 input:{
 	"close":{
 			"container":"control-right",
-			"type":"submit",			
+			"type":"select",			
 			click:function(){							   
 				action.close();			
 				return false;
-			}
+			},
+			"options":[
+				{"value":"val1","text":"text1"},
+				{"value":"val2","text":"text2"}
+			],
 		},
 }
 </pre>
@@ -107,7 +112,10 @@ input:{
 <strong>callback = </strong> (function clousure) define callback after load content<br>
 <strong>input = </strong> define buttons to box<br>
 <strong>input.container =</strong> define locate to insert button - (control-right/control-center/control-left)<br>
-<strong>input.type =</strong> define type of button - (a/button/submit)<br>
+<strong>input.type =</strong> define type of button - (a/button/submit/text/textarea/select)<br>
+<strong>input.required =</strong> (boolean)<br>
+<strong>input.placeholder =</strong> (string)<br>
+<strong>input.options =</strong> options of select - (json)<br>
 <Br>
 
 <strong>actions </strong><br>
