@@ -481,12 +481,48 @@
 			zindex++;
 		
 
+				document.getElementById("windbox_box_"+id).setAttribute('data-id',id);
+
 			if(css != null && css.content != null)
-			windbox().jsonCssToElement(document.getElementById("windbox_content_"+id),css.content);
+				windbox().jsonCssToElement(document.getElementById("windbox_content_"+id),css.content);
 
-			if(css != null && css.box != null)
-			windbox().jsonCssToElement(document.getElementById("windbox_box_"+id),css.box);
+			if(css != null && css.box != null && css.box.out != null){	
+				windbox().jsonCssToElement(document.getElementById("windbox_box_"+id),css.box.out);
+				document.getElementById("windbox_box_"+id).setAttribute('data-css-out',JSON.stringify(css.box.out));
+			}
 
+			if(css != null && css.box != null && css.box.out != null){
+				document.getElementById("windbox_box_"+id).setAttribute('data-css-hover',JSON.stringify(css.box.hover));
+				document.getElementById("windbox_box_"+id).onmouseover = function(){				
+					var id = this.getAttribute('data-id');				
+					var hover = this.getAttribute('data-css-hover');				
+					if(hover != null && hover != undefined)
+					windbox().jsonCssToElement(this,JSON.parse(hover));
+
+					// clearInterval(alignBoxTime);
+					// windbox(id).alignBox(id);
+				}
+				document.getElementById("windbox_box_"+id).onfocus = function(){				
+					var id = this.getAttribute('data-id');				
+					var hover = this.getAttribute('data-css-hover');				
+					if(hover != null && hover != undefined)
+					windbox().jsonCssToElement(this,JSON.parse(hover));
+
+					// clearInterval(alignBoxTime);
+					// windbox(id).alignBox(id);
+				}
+			}
+
+			if(css != null && css.box != null && css.box.out != null){
+				document.getElementById("windbox_box_"+id).onmouseout = function(){		
+				var id = this.getAttribute('data-id');			
+					var out = this.getAttribute('data-css-out');				
+					if(out != null && out != undefined)
+					windbox().jsonCssToElement(this,JSON.parse(out));
+
+					// windbox(id).alignBox(id);
+				}
+			}
 			
 			document.getElementById('windbox_box_'+id).style.visibility = "hidden";
 			

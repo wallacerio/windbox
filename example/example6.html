@@ -18,7 +18,28 @@
 		icon:'[info]',
 		title:'WindBox',			
 		fixed:true,		
-		drag:true,				
+		drag:true,	
+		css:{
+			box:{
+				out:{					
+					'width':'50%',
+					'height':'50%',	
+					'border':'5px solid #ccc'									
+				},
+				hover:{										
+					'border':'5px solid #66BDFF'									
+				}
+			},
+			content:{
+				out:{
+					// 'background':'#eee',
+					// 'width':'400px',
+					// 'height':'100%',					
+					'overflow':'auto',					
+					'overflow-x':'hidden'
+				}
+			}
+		},			
 		callback:function(result){		
 		},
 		input:{
@@ -36,6 +57,15 @@
 				click:function(){				
 				    var name = action.input("name").value;			
 				    alert('name: '+name);			
+					return false;
+				}
+			},
+			"close":{
+				"container":"header-right",
+				"type":"a",
+				"value":"Close",									
+				click:function(){				
+				    action.close();
 					return false;
 				}
 			}
@@ -63,7 +93,7 @@
 </p>
 	<hr>
 
-	<a href="#" onclick="CallBox()">Call box modal</a>
+	
 </div>
 
 </body>

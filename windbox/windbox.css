@@ -70,7 +70,7 @@
 .windbox_default [data-windbox="header"]{
 	display: table;
 	width: 100%;
-	padding-right: 5px;
+	/*padding-right: 5px;*/
 	box-sizing:border-box;
 }.windbox_default [data-windbox="header-left"]{
 	display: table-cell;
@@ -119,12 +119,15 @@
 }.windbox_default [data-windbox="header-left"]{
 	padding:5px;
 	color: #666;
+	text-align: left;
 }.windbox_default [data-windbox="header-center"]{
 	vertical-align: middle;
 	color: #666;
+	text-align: left;
 }.windbox_default [data-windbox="header-right"]{
 	vertical-align: middle;
 	color: #50bdf0;
+	text-align: right;
 }
 
 /* footer ------------------------------------------  */
@@ -176,6 +179,17 @@
 }
 
 
+
+.windbox_default [data-windbox="footer-left"] [data-type="col"] {
+    margin: 0px;
+    margin-right: 3px;
+}.windbox_default [data-windbox="footer-center"] [data-type="col"] {
+    margin: 0px;
+    margin-right: 3px;
+}.windbox_default [data-windbox="footer-right"] [data-type="col"] {
+    margin: 0px;
+}
+
 .windbox_default [data-type="submit"],
 .windbox_default [data-type="a"],
 .windbox_default [data-type="button"]{
@@ -195,7 +209,7 @@
 	padding: 7px;
 	padding-left: 13px;
 	padding-right: 13px;
-
+	margin: 0px;
 
 
 }
@@ -245,6 +259,7 @@
 	color:#fff;
 	background:#66bdff;
 	border:1px solid #0d9eff;
+	margin: 0px;
 }
 @-moz-document url-prefix() {
     .windbox_default [data-type="a"]:hover{
@@ -296,6 +311,7 @@
 	color:#00416E;
 	background:#007CD0;
 	border:1px solid #025E9C;
+	margin: 0px;
 }
 @-moz-document url-prefix() {
     .windbox_default [data-type="a"]:active{
@@ -341,6 +357,7 @@
 	box-shadow: 1px 1px 2px -1px #ccc inset;
 	color: #777;
 	width: 100%;
+	box-sizing: border-box;
 }
 .windbox_default input:not([type="submit"]):focus,
 .windbox_default textarea:focus,
@@ -358,6 +375,7 @@
 	/*padding-right: 13px;*/
 	box-shadow: 1px 1px 2px -1px #ccc inset;
 	color: #444;
+	box-sizing: border-box;
 }
 
 
