@@ -79,10 +79,12 @@
 .windbox_lightbox [data-windbox="header"]{
 	display: table;
 	width: 100%;
-}.windbox_lightbox [data-windbox="header-icon"]{
+}.windbox_lightbox [data-windbox="header-left"]{
 	display: table-cell;
 	width: 1px;
-}.windbox_lightbox [data-windbox="header-title"]{
+}.windbox_lightbox [data-windbox="header-center"]{
+	display: table-cell;	
+}.windbox_lightbox [data-windbox="header-right"]{
 	display: table-cell;	
 }
 
@@ -114,10 +116,13 @@
 .windbox_lightbox [data-windbox="header"]{
 	border-bottom: 0px solid #ccc;
 	margin-bottom: 0px;
-}.windbox_lightbox [data-windbox="header-icon"]{
+}.windbox_lightbox [data-windbox="header-left"]{
 	padding:0px;
 	color: #eee;
-}.windbox_lightbox [data-windbox="header-title"]{
+}.windbox_lightbox [data-windbox="header-center"]{
+	vertical-align: middle;
+	color: #50bdf0;
+}.windbox_lightbox [data-windbox="header-right"]{
 	vertical-align: middle;
 	color: #50bdf0;
 }
