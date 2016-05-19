@@ -1,5 +1,5 @@
 /**
- * WindBox 1.2 - 10/04/2016
+ * WindBox 1.3 - 19/05/2016
  * modal box cross-browser
  * 
  * developed by Wallace Rio <wallrio@gmail.com>
@@ -65,6 +65,7 @@
 		
 			listWindow[idBox] = op;
 			this.id = idBox;
+			this.status = op.status;
 
 
 
@@ -523,6 +524,15 @@
 					// windbox(id).alignBox(id);
 				}
 			}
+
+
+
+			if(css != null && css.background != null && css.background.out != null){	
+				windbox().jsonCssToElement(document.getElementById("windbox_background_"+id),css.background.out);
+				// document.getElementById("windbox_background_"+id).setAttribute('data-css-out',JSON.stringify(css.box.out));
+			}
+
+
 			
 			document.getElementById('windbox_box_'+id).style.visibility = "hidden";
 			
@@ -1775,7 +1785,7 @@
 			
 
 			listWindow[id].status = "opened";
-
+			this.status = listWindow[id].status;
 
 			var icon = listWindow[id].icon;
 			var title = listWindow[id].title;
