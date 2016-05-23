@@ -378,7 +378,11 @@
 	color: #444;
 	box-sizing: border-box;
 }
-
+.windbox_default label{
+	color: #666;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 
 .windbox_default  .iconinfo {
 		display: block;

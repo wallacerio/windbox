@@ -1,9 +1,20 @@
-function example1(){	
+function example0(){	
 	windbox('plugin',{
+	    icon:'[info]',
+	    title:'WindBox',                        
+	    content:{
+	         value:'hello world',           
+	    }           
+	}).show();
+}
+
+function example1(){	
+	windbox('example1',{
 		icon:'[info]',
 		title:'WindBox',			
 		fixed:true,		
-		drag:true,		
+		drag:true,	
+		escape:false,	
 		content:{
 			 value:'hello world',			
 		},
@@ -46,7 +57,7 @@ function example1(){
 
 
 function example2(){
-	windbox('plugin',{
+	windbox('example2',{
 		icon:'[info]',
 		title:'WindBox',			
 		fixed:true,		
@@ -76,7 +87,7 @@ function example2(){
 
 
 function example3(){
-	windbox('plugin',{
+	windbox('example3',{
 		icon:'[info]',
 		title:'WindBox',			
 		fixed:true,		
@@ -116,9 +127,10 @@ function example4(mode){
 
 	
 
-	if( windbox('plugin').status != 'opened'){
 
-			windbox('plugin',{
+	if( windbox('example4').status != 'opened'){
+
+			windbox('example4',{
 				icon:'[info]',
 				title:'WindBox',
 				css:{
@@ -156,16 +168,16 @@ function example4(mode){
 		}
 
 	if(mode == 'show')
-		windbox('plugin').show();
+		windbox('example4').show();
 	else
-		windbox('plugin').hide();
+		windbox('example4').hide();
 
 }
 
 
 
 function example5(){
-	windbox('plugin',{
+	windbox('example5',{
 		icon:'[info]',
 		title:'WindBox',			
 		fixed:true,		
@@ -188,6 +200,73 @@ function example5(){
 				
 					return false;
 				}
+			}
+		}
+	}).show();	
+}
+
+
+
+function example6(){
+	windbox('example6',{
+		icon:'[info]',
+		title:'WindBox',			
+		fixed:true,		
+		drag:true,			
+		content:{
+			value:"This is a example 6"		
+		},
+		callback:function(result){	
+			action.icon("[loading]");
+			action.title("Example 6");
+		},
+		input:{			
+			"close":{
+				"container":"control-right",
+				"type":"a",
+				"value":"Close",									
+				click:function(){
+				    action.close();
+				
+					return false;
+				}
+			},
+			"ok":{
+				"container":"control-left",
+				"type":"submit",
+				"value":"OK",									
+				click:function(){							
+				    action.close();
+				
+					return false;
+				}
+			},
+			"number":{
+				"container":"content",
+				"type":"text",
+				"placeholder":"Number",	
+				attr:{
+					"required":"required"
+				},	
+				change:function(){					
+					action.input('labelresult').innerHTML = windbox().stringChange.noaccents(this.value);
+				}											
+			},
+			"label":{
+				"container":"content",
+				"type":"label",
+				"value":"Result no accents:",	
+				attr:{
+					"for":"number"
+				}										
+			},
+			"labelresult":{
+				"container":"content",
+				"type":"label",
+				"value":"#",	
+				attr:{
+					"for":"number"
+				}										
 			}
 		}
 	}).show();	

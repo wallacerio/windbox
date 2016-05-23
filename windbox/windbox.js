@@ -883,6 +883,8 @@
 					inputsHtml = '<input type="'+type+'" value="'+value+'"  placeholder="'+placeholder+'" name="'+key+'" id="windbox_input_'+id+'_'+key+'" data-type="text" '+required+' >';
 				}else if(type == 'text'){
 					inputsHtml = '<input type="'+type+'" value="'+value+'"  placeholder="'+placeholder+'" name="'+key+'" id="windbox_input_'+id+'_'+key+'" data-type="text" '+required+' >';
+				}else if(type == 'label'){
+					inputsHtml = '<label name="'+key+'" id="windbox_input_'+id+'_'+key+'" data-type="label"  >'+value+'</label>';	
 				}else if(type == 'file'){
 					inputsHtml = '<input type="'+type+'" value="'+value+'"  name="'+key+'" id="windbox_input_'+id+'_'+key+'" data-type="file" '+required+' >';
 				}else if(type == 'textarea'){
@@ -1211,7 +1213,7 @@
 						var element = document.getElementById("windbox_input_"+id+'_'+keys);
 						if(element.getAttribute('data-content') != element.value){							
 							if(change)			
-								change();
+								change.call(element);
 							element.setAttribute('data-content',element.value);
 						}				
 					}
@@ -1362,7 +1364,8 @@
 								if(returns == false)
 									return returns;
 								if(keyup)
-									return keyup(this);
+									return keyup.call(this);
+									// return keyup(this);
 								// if(change)
 								// 	return change(this);	
 														
@@ -1441,7 +1444,9 @@
 									if(returns != false || returns == undefined){										
 										windbox().id = id;
 										if(click){
-											return click(this);												
+											return click.call(this);
+											// return click(this);												
+											// return click(this);												
 										}
 									}
 								};
@@ -1459,7 +1464,8 @@
 
 								parent.id = id;
 								if(click)
-									return click(this);		
+									return click.call(element);		
+									// return click(this);		
 							});
 
 							
@@ -1471,7 +1477,8 @@
 								var click = inputs[keys].click;
 
 								if(click)
-									return click(this);							
+									return click.call(this);					
+									// return click(this);							
 							}
 							
 						}

@@ -56,6 +56,20 @@
 
 <h3>Example</h3>
 
+<h2>Modal minimal</h2>
+<p>Use script above:</p>
+<pre>
+windbox('plugin',{
+    icon:'[info]',
+    title:'WindBox',                        
+    content:{
+         value:'hello world',           
+    }           
+}).show();
+</pre>  
+<a onclick="example0()" >Modal minimal</a>
+
+
 <h2>Modal default</h2>
 <p>Use script above:</p>
 <pre>
@@ -170,7 +184,7 @@
 				}
 			}
 		}
-	});	
+	}).show();	
 </pre>
 
 <a onclick="example3()" >Modal content value with ajax example</a>
@@ -178,14 +192,6 @@
 <h3>Example 4 - Show/Hide modal with link action</h3>
 	<p>Your can create windbox without '.show()' or '.hide()' and call last</p>
 
-<pre>
-	function CallBox(){		
-		windbox('plugin').show();			
-	}
-</pre>
-
-<h3>Example 5 - Box input</h3>
-	<p></p>
 <pre>
 	windbox('plugin').show();
 	or
@@ -196,9 +202,6 @@
 <a onclick="example4('hide')" >Hide</a>
 
 
-
-<a onclick="example2()" >Modal content value with ajax example</a>
-<br>
 <br>
 <br>
 <br>
@@ -212,7 +215,7 @@
 		title:'WindBox',			
 		fixed:true,		
 		drag:true,	
-		cssclass:"",
+		cssclass:"custom",
 		content:{
 			value:"words"		
 		},
@@ -232,10 +235,10 @@
 				}
 			}
 		}
-	});	
+	}).show();	
 </pre>
 
-<a onclick="example5()" >Modal content value with ajax example</a>
+<a onclick="example5()" >Show modal custom css style</a>
 
 
 
@@ -268,11 +271,98 @@
 <strong>input.placeholder =</strong> (string)<br>
 <strong>input.options =</strong> options of select - (json)<br>
 <strong>makeinput =</strong> create input to use on inputs<br>
-<strong>parameters =</strong> use to pass parameters to functions of WindBox<br>
+<strong>parameters =</strong> (json) use to pass parameters to functions of WindBox<br>
+<strong>pattern =</strong> (regex) use to format input<br>
 <Br>
 <hr>
+<strong>input actions/attribute </strong><br>
+call functions to run on action of inputs<br><br>
+
+<strong>click</strong> <br>
+<pre>
+	input:{			
+		"id_of_input":{
+			"container":"control-right",
+			"type":"a",
+			"value":"button",									
+			click:function(){
+				// script to run
+			}
+		}
+	}
+</pre>
+
+<br>
+
+<strong>keyup</strong> <br>
+<pre>
+	input:{			
+		"id_of_input":{
+			container:"control-right",
+			type:"a",
+			value:"button",									
+			keyup:function(){
+				// script to run
+			}
+		}
+	}
+</pre>
+
+<br>
+
+<strong>change</strong> <br>
+<pre>
+	input:{			
+		"id_of_input":{
+			container:"content",
+			type:"text",
+			value:"button",									
+			change:function(){
+				// script to run
+			}
+		}
+	}
+</pre>
+
+<br>
+
+<strong>Attribute</strong> <br>
+<pre>
+	input:{			
+		"id_of_input":{
+			container:"content",
+			type:"text",
+			value:"button",									
+			attr:{
+				"required":"required"
+			}
+		}
+	}
+</pre>
+
+<br>
+
+<strong>Css</strong> <br>
+<pre>
+	input:{			
+		"id_of_input":{
+			container:"content",
+			type:"text",
+			value:"button",									
+			css:{
+				"background":"red"
+			}
+		}
+	}
+</pre>
+
+<br>
+
+<a onclick="example6()" >Show Example</a>
+
+<hr>
 <strong>actions </strong><br>
-call funcitons to run on click button and callback<br><br>
+call functions to run on click button and callback<br><br>
 
 <strong>action.close(id); =</strong> close box<br>
 <strong>action.title(string); =</strong> change title of box<br>
@@ -283,7 +373,7 @@ call funcitons to run on click button and callback<br><br>
 
 <hr>
 <strong>actions out plugin function</strong><br>
-call funcitons to run on click button and callback<br><br>
+call functions to run on click button and callback<br><br>
 
 <strong>windbox(id).show(id); =</strong> show the modal box (id optional)<br>
 <strong>windbox(id).hide(id); =</strong> hide the modal box (id optional)<br>

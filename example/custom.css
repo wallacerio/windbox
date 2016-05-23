@@ -18,7 +18,7 @@
 	background:rgb(0, 173, 239);
     background: transparent\9; 
     background:rgba(0, 173, 239,0.8); 
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000); /* needed for IE 6-8 */    
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#9933BDF2,endColorstr=#9933BDF2); /* needed for IE 6-8 */    
     zoom: 1; 
 
 }.custom [data-windbox="wrapper"]{	
